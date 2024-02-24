@@ -62,26 +62,24 @@ def get_eligibility_info():
         edit_patient(row)
         time.sleep
         print(browser.get_window_names("CURRENT"))
-        break
 
 
 def get_payor_logic_info(info):
     browser.switch_window("payorLogic")
-    time.sleep(2)
+    time.sleep(1)
     browser.press_keys('xpath://*[@id="app_New"]', "RETURN")
-    time.sleep(3)
+    time.sleep(1)
     browser.click_element("css=#pl_eligibility_checkbox")
     time.sleep(1)
     browser.input_text_when_element_is_visible('xpath://*[@id="app_RunTestsDialog_EligibilityPayors_chosen"]/ul/li/input', "Medicaid - TMHP")
     browser.press_keys('xpath://*[@id="app_RunTestsDialog_EligibilityPayors_chosen"]/ul/li/input', "RETURN")
     browser.click_element('xpath:/html/body/div[5]/div[3]/div/button[1]')
-    time.sleep(5)
+    time.sleep(1)
     browser.go_to(f"https://allmh.traumasoft.com/main.php?a=billing:validation/main&popup=1#id:{info['leg_id']}")
-    browser.maximize_browser_window()
+
 
 def edit_patient(patient):
     browser.go_to(f"https://allmh.traumasoft.com/main.php?a=cadv3:patients/main&patient_id={patient['patient_id']}")
-    browser.maximize_browser_window()
     print(browser.get_window_names("CURRENT"))
 
 
