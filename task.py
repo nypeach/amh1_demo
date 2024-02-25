@@ -46,21 +46,23 @@ def get_eligibility_info():
     for row in top_ten:
         print(row)
         browser.go_to(f"https://allmh.traumasoft.com/main.php?a=billing:validation/main&popup=1#id:{row['leg_id']}")
-        time.sleep(1)
+        browser.maximize_browser_window()
+        time.sleep(2)
         browser.click_element_when_visible("css=#app_mainView_medical")
-        time.sleep(1)
+        time.sleep(2)
         browser.click_element_when_visible("css=#app_mainView_billing")
-        time.sleep(1)
+        time.sleep(2)
         browser.click_element_when_visible("css=#app_mainView_notes")
-        time.sleep(1)
+        time.sleep(2)
         browser.click_element_when_visible("css=#app_mainView_attachments")
-        time.sleep(1)
+        time.sleep(2)
         browser.click_element_when_visible("css=#app_mainView_history")
-        time.sleep(1)
+        time.sleep(2)
         browser.press_keys("css=#otherActions", "RETURN+ARROW_UP+ARROW_UP+RETURN")
+        time.sleep(4)
         get_payor_logic_info(row)
         edit_patient(row)
-        time.sleep
+        time.sleep(2)
         print(browser.get_window_names("CURRENT"))
 
 
@@ -69,17 +71,18 @@ def get_payor_logic_info(info):
     time.sleep(1)
     browser.press_keys('xpath://*[@id="app_New"]', "RETURN")
     time.sleep(1)
-    browser.click_element("css=#pl_eligibility_checkbox")
+    browser.click_element_when_visible("css=#pl_eligibility_checkbox")
     time.sleep(1)
     browser.input_text_when_element_is_visible('xpath://*[@id="app_RunTestsDialog_EligibilityPayors_chosen"]/ul/li/input', "Medicaid - TMHP")
     browser.press_keys('xpath://*[@id="app_RunTestsDialog_EligibilityPayors_chosen"]/ul/li/input', "RETURN")
     browser.click_element('xpath:/html/body/div[5]/div[3]/div/button[1]')
-    time.sleep(1)
-    browser.go_to(f"https://allmh.traumasoft.com/main.php?a=billing:validation/main&popup=1#id:{info['leg_id']}")
+    time.sleep(10)
 
 
 def edit_patient(patient):
+    browser.switch_window('BillingValidation_')
     browser.go_to(f"https://allmh.traumasoft.com/main.php?a=cadv3:patients/main&patient_id={patient['patient_id']}")
+    time.sleep(7)
     print(browser.get_window_names("CURRENT"))
 
 
